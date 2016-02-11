@@ -30,7 +30,6 @@ def signup(request):
 
 
 def Login(request):
-	#print request.user.is_authenticated()
 	if request.user.is_authenticated():
 		return HttpResponseRedirect(reverse('board:index'))
 
@@ -47,7 +46,7 @@ def Login(request):
 
 				redirect_to = request.POST.get(REDIRECT_FIELD_NAME,
                                    request.GET.get(REDIRECT_FIELD_NAME, ''))
-				print redirect_to
+				#print redirect_to
 
 				if user is not None:	
 					login(request,user)
