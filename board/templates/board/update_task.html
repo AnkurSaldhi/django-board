@@ -1,0 +1,6 @@
+<form action='{% url 'board:updatetask' task_id %}' method='post'>
+	{% csrf_token %}
+	<label>Completed Percentage: </label>
+	<input type='text' name='percentage' />
+	<input type="submit" name="Update" />
+</form>

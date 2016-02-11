@@ -1,0 +1,29 @@
+{% load staticfiles %}
+<link rel="stylesheet" type="text/css" href="{% static 'board/style.css' %}" />
+
+<h4> Hello {{user.username}} </h4>
+<a href="/boards/addboard">Add Board</a>
+<a href="/boards/logout">Logout</a>
+{% if boards %}
+	{% for board in boards %}
+		<ul class='board-border'>
+			<h1 style='margin-top:60px;'>{{board.name}}</h1>
+			{% if board.task_set.all|length %}
+				{% for task in board.task_set.all %}
+					<div style='margin-left:50px;margin-top:40px;'>
+						<h3>{{forloop.counter}}</h3>
+						<li>{{task.description}}</li>
+						<li>Completed Percentage -> <span style='color:green;'>{{task.completed_percentage}}</style></li>
+						<a style="display:inline;" href='/boards/updatetask/{{task.id}}'>Update Percentage</a>
+					</div>	
+				{% endfor %}
+			{% else %}
+				<i style='margin-left:50px;'> * No Tasks assigned for this board </i>	
+			{% endif %}	
+		</ul>	
+	{% endfor %}
+
+{% else %}
+	<h1 style="text-align:center;">No boards exist.....</h1>
+	<div style="margin-bottom:40px;"></div>
+{% endif %}

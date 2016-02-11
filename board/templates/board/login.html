@@ -1,0 +1,11 @@
+<a style='margin-right:50px;' href='/boards/signup/'>Signup</a>
+<form action='{% url 'board:login' %}' method='post'>
+	{% csrf_token %}
+	{{form.as_p}}
+
+	{% if error %}
+		{{error}}
+	{% endif %}
+	<input type="hidden" name="next" value="{{request.GET.next}}" />
+	<input type='submit' value='login'>
+</form>
