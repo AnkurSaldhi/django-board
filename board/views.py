@@ -95,7 +95,7 @@ def update_task(request, task_id):
 		return render(request, 'board/update_task.html', {'task_id': task_id})
 	else:
 		if request.method=='POST':
-			if str(request.POST['percentage']).isdigit():
+			if str(request.POST['percentage']).isdigit() and int(request.POST['percentage'])<=100:
 				#print type(request.POST['percentage'])
 				task.completed_percentage = request.POST['percentage']
 				task.save()
