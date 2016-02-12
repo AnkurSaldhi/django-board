@@ -86,7 +86,7 @@ def logout(request):
 @login_required(login_url='board:login')
 def update_task(request, task_id):
 	task = Task.objects.get(id=task_id)
-	print task.board.user, request.user
+	#print task.board.user, request.user
 	if task.board.user!=request.user:
 		signout(request)
 		return HttpResponseRedirect(reverse('board:login'))
@@ -95,6 +95,10 @@ def update_task(request, task_id):
 		return render(request, 'board/update_task.html', {'task_id': task_id})
 	else:
 		if request.method=='POST':
-			task.completed_percentage = request.POST['percentage']
-			task.save()
-			return HttpResponseRedirect(reverse('board:index'))
+			if str(request.POST['percentage']).isdigit():
+				#print type(request.POST['percentage'])
+				task.completed_percentage = request.POST['percentage']
+				task.save()
+				return HttpResponseRedirect(reverse('board:index'))
+			else:
+				return render(request,'board/update_task.html', {'message': 'Please enter integer values only', 'task_id': task_id})	

@@ -1,5 +1,9 @@
+<a href="/boards/logout">Logout</a>
 <form action='{% url 'board:updatetask' task_id %}' method='post'>
 	{% csrf_token %}
+	{% if message %}
+		{{message}}
+	{% endif %}
 	<label>Completed Percentage: </label>
 	<input type='text' name='percentage' />
 	<input type="submit" name="Update" />
